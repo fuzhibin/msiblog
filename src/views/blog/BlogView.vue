@@ -5,8 +5,11 @@
       <div class="article-img-view">
         <img :src="coverImg" alt="" >
       </div>
-      <soft-ware class="share" 
-                  @qqClic="qqClick"/>
+      <div class="share-box">
+        <span>分享到:</span>
+        <soft-ware class="share" @qqClic="qqClick"/>
+        <div class="labels">标签:<span v-for="label in labels" :key="label.id">{{label.label}}</span></div>
+      </div>
       <div v-html="content"></div>
     </div>
   </div>
@@ -19,7 +22,8 @@ export default {
     return {
         content:'',
         title:'',
-        coverImg:''
+        coverImg:'',
+        labels:[]
     }
   },
   components:{
@@ -29,7 +33,8 @@ export default {
     getEssayDetail(this.$route.query.articleId,false).then(res =>{
       this.title = res.title;
       this.coverImg = res. coverimgUrl;
-      this.content = res.message
+      this.content = res.message;
+      this.labels.push(...res.labels);
     })
   },
   methods:{
@@ -41,9 +46,28 @@ export default {
 </script>
 
 <style scoped>
+.share-box{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.share-box span {
+
+}
+.labels{
+  margin-left: auto;
+}
+.labels span {
+  color: #FD7831;
+    background-color: #FCCAF2;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
 .share {
   justify-content: flex-start;
   font-size: .14rem !important;
+  margin-bottom: 0;
 }
 .blog-view {
     margin: 55px auto;

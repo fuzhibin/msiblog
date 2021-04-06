@@ -17,6 +17,10 @@ const Profile = () =>
 
 const EditorView = () =>
     import ('views/editor/EditorView');
+const UserArticlesList = () =>
+    import ('views/profile/page/UserArticlesList');
+const MyselfInfo = () =>
+    import ('views/profile/page/MyselfInfo');
 const routes = [{
     path: '',
     redirect: "/home"
@@ -37,7 +41,15 @@ const routes = [{
     component: PictureShow
 }, {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    redirect: '/profile/userArticleList',
+    children: [{
+        path: 'userArticleList',
+        component: UserArticlesList
+    }, {
+        path: 'myselfinfo',
+        component: MyselfInfo
+    }]
 }, {
     path: '/editor',
     component: EditorView

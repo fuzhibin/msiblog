@@ -4,10 +4,10 @@
          <h4>{{isflag?"登陆":"注册"}}</h4>
          <div class="login-body" v-show='isflag'>
             <div>
-                用户名：<input type="text" v-model="username" placeholder="请输入用户名">
+                用户名：<input type="text" v-model.trim="username" placeholder="请输入用户名">
             </div>
             <div>
-                密&nbsp;&nbsp;&nbsp;码：<input type="password" v-model="password" 
+                密&nbsp;&nbsp;&nbsp;码：<input type="password" v-model.trim="password" 
                 @keyup.enter="submitClic"
                 placeholder="请输入密码">
             </div> 
@@ -18,13 +18,13 @@
          </div>
          <div class="login-body" v-show='!isflag'>
             <div>
-                用户名：<input type="text" v-model="username" placeholder="请输入用户名">
+                用户名：<input type="text" v-model.trim="username" placeholder="请输入用户名">
             </div>
             <div>
-                密&nbsp;&nbsp;&nbsp;码：<input type="password" v-model="password" placeholder="请输入密码">
+                密&nbsp;&nbsp;&nbsp;码：<input type="password" v-model.trim="password" placeholder="请输入密码">
             </div>
             <div>
-                确认密码：<input type="password" v-model="passwordAgain" placeholder="请输入确认密码">
+                确认密码：<input type="password" v-model.trim="passwordAgain" placeholder="请输入确认密码">
             </div>
             <div>
                 <button @click="submitClic">提交</button>
@@ -40,7 +40,7 @@
 
 <script>
 
-import {postInfoLogin} from "network/user"
+import {postInfoLogin,registereUser} from "network/user"
 
 export default {
   data () {
@@ -56,7 +56,7 @@ export default {
       resetInpt(){
           this.username='',
           this.password='',
-         this.passwordAgain=''
+          this.passwordAgain=''
       },
       aClic(){
           this.isflag=!this.isflag;
@@ -67,6 +67,19 @@ export default {
                   localStorage.setItem("token",res.token);
                   this.$router.replace('/profile');
               })
+          }else{
+              if(!this.username||!this.password){
+                  alert("用户名或者密码不能为空~")
+                  return
+              };
+              if(this.password != this.passwordAgain){
+                  alert("两次密码输入不一致~");
+                  return 
+              };
+              registereUser(this.username,this.password).then(res => {
+                  console.log('注册成功~');
+              })
+              
           }
       }
   },
@@ -77,7 +90,7 @@ export default {
    }else{
        next();
    }
-  },
+  }
 }
 </script>
 

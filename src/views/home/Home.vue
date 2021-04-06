@@ -2,7 +2,7 @@
   <div class="home"> 
     <div class="home-page">
       <div class="background-img">
-        <img src="~assets/imgs/background.jpg" alt="">
+        <img :src="backgroundurl" alt="">
       </div> 
       <div class="myhead">
         <img src="~assets/imgs/myhead.jpg" alt=""> 
@@ -13,6 +13,9 @@
           海日生残夜，江春入旧年。
         </div>
         <soft-ware @qqClic="qqClick" class="soft-ware"/>
+        <div class="wellcome-myblog">
+          <span @click="enterMyBlog">进入我的博客</span>
+        </div>
       </div>
       
     </div>
@@ -20,17 +23,30 @@
 </template>
 <script>
 import SoftWare from 'components/common/software/SoftWare'
-import  Velocity from 'velocity-animate'
+
+import {backgroundUrl} from 'network/background'
 export default {
 name:'Home',
+data(){
+  return {
+    backgroundurl:''
+  }
+},
 components:{
   SoftWare
   },
   methods:{
     qqClick(){
       console.log('1111111111111111111');
-
+    },
+    enterMyBlog(){
+      this.$router.replace('/article')
     }
+  },
+  created(){
+    backgroundUrl().then(res => {
+      this.backgroundurl = res.picurl;
+    })
   }
 }
 </script>
@@ -42,12 +58,13 @@ components:{
 }
 .home-page {
   position: relative;
-  
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }
 .background-img {
   width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .background-img img {
@@ -89,30 +106,52 @@ components:{
   padding-top: 10px;
   justify-content: center;
 }
+.wellcome-myblog {
+  display: none;
+  margin-top: 30px;
+  color: transparent;
+  line-height: 30px;
+  text-align: center;
+}
+.wellcome-myblog span {
+  display: inline-block;
+  width: 120px;
+  height: 30px;
+  color: #f3f3f3;
+  border-radius: 50px;
+  background-color: #1A73E8;
+}
+@media screen  and (min-width:768px){
+.background-img img {
+  width: 100%;
+}
+}
 @media screen  and (max-width:768px){
   .myhead {
     top: 15%;
   }
-  
  .myname {
-  font-size: .3rem !important;
+  font-size: .3rem ;
   }
 .quotes {
-  font-size: 0.4rem !important;
+  font-size: 0.4rem;
 }
 .myhead img {
   width: 3.25rem;
   height: 3.25rem;
   }
+  .wellcome-myblog{
+    display: block;
+    font-size: .4rem;
+  }
 }
 @media screen and (max-width:450px) {
-
    .myname {
-     padding-top: 1.8rem  !important;
-     font-size: .5rem !important;
+     padding-top: 1.8rem  ;
+     font-size: .5rem ;
    }
    .quotes {
-    padding-bottom: 1rem !important;
+    padding-bottom: 1rem ;
   }
 }
 </style>

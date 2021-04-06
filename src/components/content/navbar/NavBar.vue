@@ -5,15 +5,11 @@
       <i class="bi bi-justify "></i>
        </label>
     </div>
-    <input type="checkbox" id="toggle-nav">
+    <input type="checkbox" id="toggle-nav" ref="checkboxClic">
     <div class="nav-middle">
         <ul class="navbar-ul">
-        <li v-for="item in titles" :key="item" @click="titleClic(item)"><i :class="item.iconClass"></i>{{item.title}}</li>
-        
+        <li v-for="item in titles" :key="item" @click="titleClic(item)"><i :class="item.iconClass"></i>{{item.title}}</li> 
         </ul>
-   </div>
-   <div class="logo">
-       <img src="~assets/imgs/logo.png" alt="">
    </div>
 </div>
   
@@ -46,6 +42,7 @@ export default {
     methods:{
         titleClic(item){     
           this.$router.replace(item.path);
+          this.$refs.checkboxClic.checked=false
         }
     }
 }
@@ -80,38 +77,28 @@ export default {
     display: flex;
     justify-content: flex-end;
     margin-right: 15px;
-    font-size: 16px;
+    
 }
 .navbar-ul li {
-    margin: 0 10px;
+    margin: 0 5px;
     list-style: none;
 }
 .navbar-ul li i {
-    font-size: 18px;
+    font-size: .12rem;
     margin-right: 5px;
 }
-.logo {
-    height: 60%;
-    width: 85px;
-    align-self: center;
-    margin-right: 15px;
-}
-.logo img {
-    width: 100%;
-    height: 100%;
-    vertical-align: top;
-}
+
 #toggle-nav {
     display: none;
 }
 
 @media screen and (max-width:768px)  {
 .more {
-    display: block !important;
+    display: block;
 }
     /* NavBar部分 */
 .nav-middle {
-    display: none !important;
+    display: none ;
     position: absolute;
     margin-top: 50px;
     width: 100%;
@@ -119,9 +106,16 @@ export default {
     z-index: 2;
     right: 0;
 }
-
+.navbar-ul li{
+font-size: .4rem;
+margin: 0;
+line-height: 40px;
+}
+.navbar-ul li i {
+    font-size: .5rem;
+}
 #toggle-nav:checked+.nav-middle {
-    display: block !important;
+    display: block ;
     }
 #toggle-nav:checked+.nav-middle .navbar-ul {
     flex-direction: column;

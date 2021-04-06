@@ -2,10 +2,12 @@
 <div class="profile">
     <div class="main">
         <div class=" col-lg-9 col-md-12 col-sm-12">
-            <user-articles-list :articles="userArticlesList"/>
+            <!-- <user-articles-list :articles="userArticlesList"/> -->
+            <router-view/>
         </div>
         <div class="profile-info col-lg-3 col-md-12 col-sm-12">
-            <user-info :user-info='showInfo'></user-info>
+             <user-info :user-info='showInfo'></user-info>
+           
         </div>
     </div>
 </div>
@@ -14,31 +16,24 @@
 <script>
 
 
-import {getUserArticles,getUserInfo} from 'network/user'
+import {getUserInfo} from 'network/user'
 
 import UserInfo from './childComps/UserInfo'
-import UserArticlesList from './childComps/UserArticlesList'
+
 export default {
   data () {
     return {
-        userArticlesList:[],
         showInfo:{}
     }
   },
   components:{
-    UserInfo,
-    UserArticlesList
+    UserInfo
   },
   created(){
-      this.getUserArticlesList();
       this.showUserInfo();
   },
   methods:{
-      getUserArticlesList(limlt=10,offset=0){
-         getUserArticles(limlt,offset).then(res => {
-             this.userArticlesList.push(...res);
-         })
-      },
+     
       showUserInfo(){
         getUserInfo().then(res=>{
             this.showInfo=res;

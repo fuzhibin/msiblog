@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="msiblog">
     <nav-bar/>
     <router-view/>
   </div>
@@ -22,5 +22,7 @@ export default {
 @import "assets/iconfont/css/font-awesome.min.css";
 @import "assets/css/init.css";
 @import "assets/css/common.css";
-
+.msiblog {
+  width: 100%;
+}
 </style>
