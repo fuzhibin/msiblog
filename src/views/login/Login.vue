@@ -12,8 +12,8 @@
                 placeholder="请输入密码">
             </div> 
             <div>
-                <button @click="submitClic">提交</button>
-                <button @click="resetInpt">重置</button>
+                <button @click="submitClic" class="subbuttom">提交</button>
+                <button @click="resetInpt" class="restbuttom">重置</button>
             </div>
          </div>
          <div class="login-body" v-show='!isflag'>
@@ -27,9 +27,10 @@
                 确认密码：<input type="password" v-model.trim="passwordAgain" placeholder="请输入确认密码">
             </div>
             <div>
-                <button @click="submitClic">提交</button>
-                <button @click="resetInpt">重置</button>
+                <button @click="submitClic" class="subbuttom">提交</button>
+                <button @click="resetInpt" class="restbuttom">重置</button>
             </div>
+            
          </div>
          <div class="login-tips">
              如果{{isflag?"还没":"已"}}有账号点击这里<a href="javascript:;" @click="aClic">{{isflag?"注册":"登陆"}}</a>
@@ -105,19 +106,25 @@ export default {
 .login-box {
     width: 4rem;
     height: 2.5rem;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.5);
     background-color: rgba(0, 0, 0, .05);
 }
 .login-box h4 {
+    height: .4rem;
+    line-height: .4rem;
+    padding-top: 10px;
     text-align: center;
     font-size: .18rem;
 }
 .login-body {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    align-items: center;
-    margin-top: .3rem;
+    justify-content: space-around;
 }
 .login-body div {
     width: 100%;
@@ -132,15 +139,26 @@ export default {
     margin-bottom: .2rem;
 }
 .login-body button {
-    width: .36rem;
+    width: .45rem;
     height: .20rem;
     margin-right: .2rem;
     font-size: .10rem;
+    border-radius: .2rem;
+    border: none;
+    color: #fff;
+}
+.subbuttom{
+    background-color: #8DC148;
+}
+
+.restbuttom {
+    background-color: #CA5555;
 }
 .login-tips {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
+    margin-left: auto;
+    margin-right: 10px;
+    line-height: .3rem;
+    margin-bottom: 15px;
     font-size: .1rem;
 }
 @media screen and (min-width: 450px)and (max-width:768px) {
@@ -153,15 +171,21 @@ export default {
     width: 40%  !important;
     height: .6rem !important;
 }
+.login-body div {
+    margin-top: 10px;
+}
 .login-body button{
     width: .62rem !important;
-    height: .45rem !important;
+    height: .40rem !important;
+}
+.login-tips {
+    font-size: .2rem !important;
 }
 }
 @media screen and (max-width:450px){
    .login-box {
     width: 90% !important;
-    height: 35% !important;
+    height: 40% !important;
    }
    .login-box h4 {
        font-size: .6rem;
@@ -177,5 +201,13 @@ export default {
     width: 1.5rem !important;
     height: .8rem !important;
     }
+    .login-tips {
+    font-size: .2rem;
 }
+.login-body button{
+    font-size: .2rem;
+}
+
+}
+
 </style>

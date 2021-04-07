@@ -45,6 +45,7 @@ components:{
   },
   created(){
     backgroundUrl().then(res => {
+      console.log(res);
       this.backgroundurl = res.picurl;
     })
   }

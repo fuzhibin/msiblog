@@ -11,5 +11,8 @@ module.exports = {
                 "views": "@/views"
             }
         }
-    }
+    },
+    assetsDir: 'static',
+    parallel: false,
+    publicPath: './',
 }

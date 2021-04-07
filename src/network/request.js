@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const request = function(config) {
     const instance = axios.create({
-        // baseURL: 'http://49.234.62.225:8001/',
-        baseURL: 'http://localhost:8000/',
+        baseURL: 'http://49.234.62.225:8001',
+        // baseURL: 'http://localhost:8000/',
         timeout: 5000
     });
 
